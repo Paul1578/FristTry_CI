@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CatalogosModule } from './catalogos/catalogos.module';
-import { EstudiantesModule } from './estudiantes/estudiantes.module';
 import { CatalogoValorModule } from './catalogo-valor/catalogo-valor.module';
 import { CarreraModule } from './carrera/carrera.module';
 import { EstudiantesModule } from './estudiantes/estudiantes.module';
