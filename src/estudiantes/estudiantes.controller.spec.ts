@@ -27,7 +27,7 @@ describe('EstudiantesController', () => {
 
 
 
-  it('should return an array of estudiantes', async () => {
+  it('should return an array of students', async () => {
     // Arrange
 
     const expectedCatalogos: Catalogo = {

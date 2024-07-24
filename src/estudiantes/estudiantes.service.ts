@@ -27,7 +27,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
         relations: ['carrera', 'nivel','estadoCivil','tipoDeSangre'],
       });
       if (!Estudiantes) {
-        throw new NotFoundException(`The Estudiante with ID ${id} is not found.`);
+        throw new NotFoundException(`The student with ID ${id} is not found.`);
       }
       return Estudiantes;
     }
@@ -83,7 +83,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
     async remove(id: number): Promise<Estudiantes> {
       const toRemove = await this.findOne(id);
       if (!toRemove) {
-        throw new NotFoundException(`The Estudiante with ID ${id} is not found.`);
+        throw new NotFoundException(`The student with ID ${id} is not found.`);
       }
       await this.estudiantesRepository.remove(toRemove);
       return toRemove;

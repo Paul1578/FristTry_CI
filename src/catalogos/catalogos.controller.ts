@@ -116,7 +116,7 @@ export class CatalogoController {
     try {
       const deletedCatalogo = await this.catalogoService.remove(id);
       if (!deletedCatalogo) {
-        throw new NotFoundException(`The Catalogue with ID ${id} is not found.`);
+        throw new NotFoundException(`Catalogue with ID ${id} not found.`);
       }
       return deletedCatalogo; 
     } catch (error) {
