@@ -38,5 +38,4 @@ export class UpdateEstudiantesDto {
   
   @ApiProperty({ example: 9987654312, description: 'Teléfono del contacto de emergencia del Estudiante' })
   telefonoDeEmergencia: string;
-  }
-  
+}

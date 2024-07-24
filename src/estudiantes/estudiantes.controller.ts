@@ -169,8 +169,8 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
         throw new HttpException(
           'Student not found.',
           HttpStatus.INTERNAL_SERVER_ERROR,
-        );
-      }
+      );
     }
   }
+}
   
