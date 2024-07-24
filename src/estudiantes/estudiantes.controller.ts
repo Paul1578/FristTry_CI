@@ -51,7 +51,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
           throw new HttpException(error.message, HttpStatus.NOT_FOUND);
         }
         throw new HttpException(
-          'student not found.',
+          'Student not found.',
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
@@ -76,7 +76,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
           throw new HttpException(error.message, HttpStatus.NOT_FOUND);
         }
         throw new HttpException(
-          'student not found.',
+          'Student not found.',
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
@@ -107,7 +107,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
           throw error;
         }
         throw new HttpException(
-          'student not found.',
+          'Student not found.',
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
@@ -144,7 +144,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
         ) {
           throw error;
         }
-        throw new Error('student not found');
+        throw new Error('Student not found.');
       }
     }
   
@@ -167,7 +167,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
           throw error;
         }
         throw new HttpException(
-          'Estudiante not found.',
+          'Student not found.',
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
