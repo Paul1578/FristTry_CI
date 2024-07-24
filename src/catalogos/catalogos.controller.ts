@@ -42,7 +42,7 @@ export class CatalogoController {
       if (error instanceof NotFoundException) {
         throw new HttpException(error.message, HttpStatus.NOT_FOUND);
       }
-      throw new HttpException('Catalogue not found', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Catalogue not found.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
   
@@ -60,7 +60,7 @@ export class CatalogoController {
       if (error instanceof NotFoundException) {
         throw new HttpException(error.message, HttpStatus.NOT_FOUND);
       }
-      throw new HttpException('Catalogue not found', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Catalogue not found.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -123,7 +123,7 @@ export class CatalogoController {
       if (error instanceof HttpException) {
         throw error; 
       }
-      throw new HttpException('Catalogue not found', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Catalogue not found.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
