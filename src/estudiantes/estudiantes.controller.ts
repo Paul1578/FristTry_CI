@@ -36,12 +36,12 @@ import {
       description: 'The query has been successfully.',
       type: Estudiantes,
     })
-    @ApiNotFoundResponse({ status: 404, description: 'Empty.' })
+    @ApiNotFoundResponse({ status: 404, description: 'Sin entidades.' })
     async findAll(): Promise<Estudiantes[]> {
       try {
         const result = await this.estudiantesService.findAll();
         if (result.length == 0) {
-          throw new NotFoundException(`Empty`);
+          throw new NotFoundException(`Sin entidades`);
         }
         return result;
       } catch (error) {
@@ -57,12 +57,12 @@ import {
       description: 'Successfully retrieved item.',
       type: Estudiantes,
     })
-    @ApiNotFoundResponse({ status: 404, description: 'Item not found.' })
+    @ApiNotFoundResponse({ status: 404, description: 'Estudiante no encontrado.' })
     async findOne(@Param('id') id: number): Promise<Estudiantes> {
       try {
         const result = await this.estudiantesService.findOne(id);
         if (!result) {
-          throw new NotFoundException(`Item with ID ${id} not found`);
+          throw new NotFoundException(`Estudiante con ID ${id} no encontrado`);
         }
         return result;
       } catch (error) {
@@ -70,7 +70,7 @@ import {
           throw new HttpException(error.message, HttpStatus.NOT_FOUND);
         }
         throw new HttpException(
-          'Internal Server Error',
+          'Estudiante no encontrado',
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
@@ -82,12 +82,12 @@ import {
       description: 'The query has been successful.',
       type: Estudiantes,
     })
-    @ApiNotFoundResponse({ status: 404, description: 'Not Foud.' })
+    @ApiNotFoundResponse({ status: 404, description: 'Estudiante no encontrado.' })
     async search(@Query('query') query: string): Promise<Estudiantes[]> {
       try {
         const result = await this.estudiantesService.search(query);
         if (!result) {
-          throw new NotFoundException(`Item with ${query} not found`);
+          throw new NotFoundException(`Estudiante con ${query} no encontrado`);
         }
         return result;
       } catch (error) {
@@ -95,7 +95,7 @@ import {
           throw new HttpException(error.message, HttpStatus.NOT_FOUND);
         }
         throw new HttpException(
-          'Internal Server Error',
+          'Estudiante no encontrado',
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
@@ -105,7 +105,7 @@ import {
     @ApiBody({ type: CreateEstudiantesDto })
     @ApiOkResponse({
       status: 200,
-      description: 'The Estudiante has been successfully created.',
+      description: 'El Estudiante fue creado exitosamente .',
       type: CreateEstudiantesDto,
     })
     @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
@@ -113,7 +113,7 @@ import {
       try {
         if (!createEstudiantesDto || Object.keys(createEstudiantesDto).length === 0) {
           throw new HttpException(
-            'Create data is empty.',
+            'Sin datos para crear.',
             HttpStatus.BAD_REQUEST,
           );
         }
@@ -136,10 +136,10 @@ import {
     @ApiBody({ type: UpdateEstudiantesDto })
     @ApiOkResponse({
       status: 200,
-      description: 'The Estudiante has been successfully updated.',
+      description: 'El estudiante fue actualizado exitosamente.',
       type: UpdateEstudiantesDto,
     })
-    @ApiNotFoundResponse({ status: 404, description: 'Estudiante not found.' })
+    @ApiNotFoundResponse({ status: 404, description: 'Estudiante no encontrado.' })
     @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
     async update(
       @Param('id') id: number,
@@ -152,7 +152,7 @@ import {
         const result = await this.estudiantesService.update(id, updateEstudiantesDto);
   
         if (!result) {
-          throw new NotFoundException(`Estudiante with ID ${id} not found.`);
+          throw new NotFoundException(`Estudiante con ID ${id} no encontrado.`);
         }
   
         return result;
@@ -170,15 +170,15 @@ import {
     @Delete(':id')
     @ApiOkResponse({
       status: 200,
-      description: 'The Estudiante has been successfully deleted.',
+      description: 'Estudiante borrado exitosamente.',
       type: Estudiantes,
     })
-    @ApiNotFoundResponse({ status: 404, description: 'Estudiante not found.' })
+    @ApiNotFoundResponse({ status: 404, description: 'Estudiante no encontrado.' })
     async remove(@Param('id') id: number): Promise<Estudiantes> {
       try {
         const deletedEstudiantes = await this.estudiantesService.remove(id);
         if (!deletedEstudiantes) {
-          throw new NotFoundException(`Estudiante with ID ${id} not found.`);
+          throw new NotFoundException(`Estudiante con ID ${id} no encontrado.`);
         }
         return deletedEstudiantes;
       } catch (error) {

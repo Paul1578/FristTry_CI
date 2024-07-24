@@ -1,31 +1,52 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EstudiantesController } from './estudiantes.controller';
 import { EstudiantesService } from './estudiantes.service';
-import { EstudiantesRepository } from './estudiantes.repository';
-
-const mockEstudiantesRepository = {
-  // Agrega métodos mock aquí si es necesario
-};
+import { Estudiantes } from './entities/estudiantes.entity'; // Asegúrate de importar la entidad correspondiente
+import { Catalogo } from 'src/catalogos/entities/catalogo.entity';
 
 describe('EstudiantesController', () => {
   let controller: EstudiantesController;
+  let service: EstudiantesService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [EstudiantesController],
       providers: [
-        EstudiantesService,
         {
-          provide: EstudiantesRepository,
-          useValue: mockEstudiantesRepository,
+          provide: EstudiantesService,
+          useValue: {
+            findAll: jest.fn(), // Mock de la función findAll del servicio
+          },
         },
       ],
     }).compile();
 
     controller = module.get<EstudiantesController>(EstudiantesController);
+    service = module.get<EstudiantesService>(EstudiantesService);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+
+
+  it('should return an array of estudiantes', async () => {
+    // Arrange
+
+    const expectedCatalogos: Catalogo = {
+      id: 2,
+      nombre: 'texto',
+      descripcion: 'Descripcion 1'
+    };
+
+    const expectedEstudiantes: Estudiantes[] = [
+      { id: 1, apellidos: 'hernan', nombres: 'Miguel', cedula: '1', carreraId: 1,nivelId:1,email:'tuliso@gmail.com',telefono:'987654321',estadoCivilId:1,tipoDeSangreId:1,domicilio:'Pisullí',contactoDeEmergencia:'Mamá',telefonoDeEmergencia:'123456789',carrera:expectedCatalogos,nivel:expectedCatalogos,estadoCivil:expectedCatalogos,tipoDeSangre:expectedCatalogos},
+    ];
+
+
+    jest.spyOn(service, 'findAll').mockResolvedValue(expectedEstudiantes);
+
+    // Act
+    const result = await controller.findAll();
+
+    // Assert
+    expect(result).toEqual(expectedEstudiantes);
   });
 });
