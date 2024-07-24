@@ -13,7 +13,7 @@ export class CarreraController {
   @Get()
   @ApiOkResponse({
     status: 200,
-    description: 'Successful query, recovered carrera.',
+    description: 'Successful query, recovered career.',
     type: Carrera,
   })
   @ApiNotFoundResponse({ status: 404, description: 'Empty' })
@@ -34,15 +34,15 @@ export class CarreraController {
   @Get(':id')
   @ApiOkResponse({
     status: 200,
-    description: 'Successfully retrieved Carrera.',
+    description: 'Successfully retrieved Career.',
     type: Carrera,
   })
-  @ApiNotFoundResponse({ status: 404, description: 'The requested carrera was not found.' })
+  @ApiNotFoundResponse({ status: 404, description: 'The requested career was not found.' })
   async findOne(@Param('id') id: number): Promise<Carrera> {
     try {
       const result = await this.carreraService.findOne(id);
       if (!result) {
-        throw new NotFoundException(`The Carrera with ID ${id} is not found`);
+        throw new NotFoundException(`The Career with ID ${id} is not found`);
       }
       return result;
     } catch (error) {
@@ -50,7 +50,7 @@ export class CarreraController {
         throw new HttpException(error.message, HttpStatus.NOT_FOUND);
       }
       throw new HttpException(
-        'Carrera not found',
+        'Career not found',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -62,12 +62,12 @@ export class CarreraController {
     description: 'The query has been successful.',
     type: Carrera,
   })
-  @ApiNotFoundResponse({ status: 404, description: 'The requested carrera was not found.' })
+  @ApiNotFoundResponse({ status: 404, description: 'The requested career was not found.' })
   async search(@Query('query') query: string): Promise<Carrera[]> {
     try {
       const result = await this.carreraService.search(query);
       if (!result) {
-        throw new NotFoundException(`The carrera with ${query} is not found.`);
+        throw new NotFoundException(`The career with ${query} is not found.`);
       }
       return result;
     } catch (error) {
@@ -75,7 +75,7 @@ export class CarreraController {
         throw new HttpException(error.message, HttpStatus.NOT_FOUND);
       }
       throw new HttpException(
-        'Carrera not found.',
+        'Career not found.',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -85,7 +85,7 @@ export class CarreraController {
   @ApiBody({ type: CreateCarreraDto })
   @ApiOkResponse({
     status: 200,
-    description: 'The Carrera has been created successfully. ',
+    description: 'The Career has been created successfully. ',
     type: CreateCarreraDto,
   })
   @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
@@ -106,7 +106,7 @@ export class CarreraController {
         throw error;
       }
       throw new HttpException(
-        'Carrera not found.',
+        'Career not found.',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -116,10 +116,10 @@ export class CarreraController {
   @ApiBody({ type: UpdateCarreraDto })
   @ApiOkResponse({
     status: 200,
-    description: 'The Carrera has been successfully updated.',
+    description: 'The Career has been successfully updated.',
     type: UpdateCarreraDto,
   })
-  @ApiNotFoundResponse({ status: 404, description: 'The requested carrera was not found.' })
+  @ApiNotFoundResponse({ status: 404, description: 'The requested career was not found.' })
   @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
   async update(
     @Param('id') id: number,
@@ -132,7 +132,7 @@ export class CarreraController {
       const result = await this.carreraService.update(id, updateCarreraDto);
 
       if (!result) {
-        throw new NotFoundException(`The Carrera with ID ${id} is not found.`);
+        throw new NotFoundException(`The Career with ID ${id} is not found.`);
       }
 
       return result;
@@ -143,22 +143,22 @@ export class CarreraController {
       ) {
         throw error;
       }
-      throw new Error('Carrera not found.');
+      throw new Error('Career not found.');
     }
   }
 
   @Delete(':id')
   @ApiOkResponse({
     status: 200,
-    description: 'The selected Carrera has been successfully deleted.',
+    description: 'The selected Career has been successfully deleted.',
     type: Carrera,
   })
-  @ApiNotFoundResponse({ status: 404, description: 'The requested carrera was not found.' })
+  @ApiNotFoundResponse({ status: 404, description: 'The requested career was not found.' })
   async remove(@Param('id') id: number): Promise<Carrera> {
     try {
       const deletedCarrera = await this.carreraService.remove(id);
       if (!deletedCarrera) {
-        throw new NotFoundException(`The Carrera with ID ${id} is not found.`);
+        throw new NotFoundException(`The Career with ID ${id} is not found.`);
       }
       return deletedCarrera;
     } catch (error) {
@@ -166,7 +166,7 @@ export class CarreraController {
         throw error;
       }
       throw new HttpException(
-        'Carrera not found.',
+        'Career not found.',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

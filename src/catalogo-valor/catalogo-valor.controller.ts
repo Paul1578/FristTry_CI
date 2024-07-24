@@ -11,7 +11,7 @@ export class CatalogoValorController {
     constructor(private readonly catalogoValorService: CatalogoValorService) {}
 
   @Get()
-  @ApiOkResponse({ status: 200, description: 'The query has been successfully.', type: ValorCatalogo})
+  @ApiOkResponse({ status: 200, description: 'Successful query, recovered catalog value', type: ValorCatalogo})
   @ApiNotFoundResponse({ status: 404, description: 'Empty.'})
   async findAll(): Promise<ValorCatalogo[]> {
     try{
@@ -29,7 +29,7 @@ export class CatalogoValorController {
   }
 
   @Get(':id')
-  @ApiOkResponse({ status: 200, description: 'Successfully retrieved item.', type: ValorCatalogo})
+  @ApiOkResponse({ status: 200, description: 'Successfully retrieved catalog value', type: ValorCatalogo})
   @ApiNotFoundResponse({ status: 404, description: 'The requested catalog value was not found.' })
   async findOne(@Param('id') id: number): Promise<ValorCatalogo> {
     try {
@@ -66,7 +66,7 @@ export class CatalogoValorController {
 
   @Post()
   @ApiBody({ type: CreateValorCatalogoDto })
-  @ApiOkResponse({ status: 200, description: 'The Catalogue has been successfully created.', type: CreateValorCatalogoDto  })
+  @ApiOkResponse({ status: 200, description: 'The catalogue value has been successfully created.', type: CreateValorCatalogoDto  })
   @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
   async create(@Body() createValorCatalogoDto: CreateValorCatalogoDto ): Promise<ValorCatalogo> {
     try {
