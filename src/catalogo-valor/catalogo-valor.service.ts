@@ -39,7 +39,7 @@ export class CatalogoValorService {
             });
             return result;
         } catch (error) {
-            throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException('Catalog value not found.', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -56,7 +56,7 @@ export class CatalogoValorService {
     async remove(id: number): Promise<ValorCatalogo> {
         const toRemove = await this.findOne(id); 
         if (!toRemove) {
-            throw new NotFoundException(`Catalogue with ID ${id} not found.`);
+            throw new NotFoundException(`Catalog value with ID ${id} not found.`);
           }
         await this.valorCatalogoRepository.remove(toRemove);
         return toRemove;

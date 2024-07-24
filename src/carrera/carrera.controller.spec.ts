@@ -47,7 +47,7 @@ describe('CarreraController', () => {
     };
 
     const expectedCarrera: Carrera[] = [
-      { id: 1, coordinador: 'hernan', docentes: ['Miguel', 'Nayheli'], periodoAcademicoId:1, nombreCarreraId: 1, periodoAcademico: expectedValorCatalogo, nombreCarrera: expectedValorCatalogo},
+      { id: 1, coordinador: 'Hernan', docentes: ['Miguel', 'Nayheli'], periodoAcademicoId:1, nombreCarreraId: 1, periodoAcademico: expectedValorCatalogo, nombreCarrera: expectedValorCatalogo},
     ];
 
     jest.spyOn(service, 'findAll').mockResolvedValue(expectedCarrera);

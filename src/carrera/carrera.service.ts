@@ -25,7 +25,7 @@ export class CarreraService {
       relations: ['periodoAcademico', 'nombreCarrera'],
     });
     if (!carrera) {
-      throw new NotFoundException(`Carrera with ID ${id} not found.`);
+      throw new NotFoundException(`The Carrera with ID ${id} is not found.`);
     }
     return carrera;
   }
@@ -53,7 +53,7 @@ export class CarreraService {
       return combinedResults;
     } catch (error) {
       throw new HttpException(
-        'Internal Server Error',
+        'Carrera not found.',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -75,7 +75,7 @@ export class CarreraService {
   async remove(id: number): Promise<Carrera> {
     const toRemove = await this.findOne(id);
     if (!toRemove) {
-      throw new NotFoundException(`Carrera with ID ${id} not found.`);
+      throw new NotFoundException(`The Carrera with ID ${id} is not found.`);
     }
     await this.carreraRepository.remove(toRemove);
     return toRemove;

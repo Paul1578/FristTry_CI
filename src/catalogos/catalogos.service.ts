@@ -35,7 +35,7 @@ export class CatalogoService {
   async remove(id: number): Promise<Catalogo> {
     const catalogoToRemove = await this.catalogoRepository.findOneBy({id});
     if (!catalogoToRemove) {
-      throw new NotFoundException(`Catalogue with ID ${id} not found.`);
+      throw new NotFoundException(`The Catalogue with ID ${id} is not found.`);
     }
     await this.catalogoRepository.remove(catalogoToRemove);
     return catalogoToRemove; 

@@ -16,7 +16,7 @@ export class Carrera {
   coordinador: string;
 
   @ApiProperty({
-    example: 'Leonardo Paul',
+    example: 'Leonardo Paúl',
     description: 'Nombres del Docente tutor',
   })
   @Column('text', { array: true })

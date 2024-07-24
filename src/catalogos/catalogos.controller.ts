@@ -42,7 +42,7 @@ export class CatalogoController {
       if (error instanceof NotFoundException) {
         throw new HttpException(error.message, HttpStatus.NOT_FOUND);
       }
-      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Catalogue not found', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
   
@@ -60,7 +60,7 @@ export class CatalogoController {
       if (error instanceof NotFoundException) {
         throw new HttpException(error.message, HttpStatus.NOT_FOUND);
       }
-      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Catalogue not found', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -80,7 +80,7 @@ export class CatalogoController {
       if (error instanceof HttpException) {
         throw error; 
       }
-      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Catalogue not found.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -97,7 +97,7 @@ export class CatalogoController {
       const result = await this.catalogoService.update(id, updateCatalogoDto);
 
       if (!result) {
-        throw new NotFoundException(`Catalogue with ID ${id} not found.`);
+        throw new NotFoundException(`The Catalogue with ID ${id} is not found.`);
       }
 
       return result; 
@@ -105,7 +105,7 @@ export class CatalogoController {
       if (error instanceof NotFoundException || error instanceof BadRequestException) {
         throw error; 
       }
-      throw new Error('Internal Server Error');
+      throw new Error('Catalogue not found.');
     }
   }
 
@@ -116,14 +116,14 @@ export class CatalogoController {
     try {
       const deletedCatalogo = await this.catalogoService.remove(id);
       if (!deletedCatalogo) {
-        throw new NotFoundException(`Catalogue with ID ${id} not found.`);
+        throw new NotFoundException(`The Catalogue with ID ${id} is not found.`);
       }
       return deletedCatalogo; 
     } catch (error) {
       if (error instanceof HttpException) {
         throw error; 
       }
-      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Catalogue not found', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 

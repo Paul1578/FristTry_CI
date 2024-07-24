@@ -1,11 +1,6 @@
-import {
-    HttpException,
-    HttpStatus,
-    Injectable,
-    NotFoundException,
-  } from '@nestjs/common';
-  import { InjectRepository } from '@nestjs/typeorm';
-  import { ILike, Like, Repository } from 'typeorm';
+import { HttpException, HttpStatus, Injectable, NotFoundException} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ILike, Like, Repository } from 'typeorm';
 import { Estudiantes } from './entities/estudiantes.entity';
 import { CreateEstudiantesDto } from './dto/CreateEstudiantes.dto';
 import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
@@ -32,7 +27,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
         relations: ['carrera', 'nivel','estadoCivil','tipoDeSangre'],
       });
       if (!Estudiantes) {
-        throw new NotFoundException(`Estudiantes with ID ${id} not found.`);
+        throw new NotFoundException(`The Estudiante with ID ${id} is not found.`);
       }
       return Estudiantes;
     }
@@ -65,7 +60,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
         return results;
       } catch (error) {
         throw new HttpException(
-          'Internal Server Error',
+          'Estudiante not found.',
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
@@ -88,7 +83,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
     async remove(id: number): Promise<Estudiantes> {
       const toRemove = await this.findOne(id);
       if (!toRemove) {
-        throw new NotFoundException(`Estudiantes with ID ${id} not found.`);
+        throw new NotFoundException(`The Estudiante with ID ${id} is not found.`);
       }
       await this.estudiantesRepository.remove(toRemove);
       return toRemove;
