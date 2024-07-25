@@ -11,7 +11,7 @@ export class CreateCarreraDto {
   coordinador: string;
 
   @ApiProperty({
-    example: 'Carrillo Arce',
+    example: ['Carrillo Arce'],
     description: 'Apellidos del Docente tutor',
   })
   docentes: string[];
