@@ -68,7 +68,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
       try {
         const result = await this.estudiantesService.search(query);
         if (!result) {
-          throw new NotFoundException(`The student with ${query} is not found.`);
+          throw new NotFoundException(`The student ${query} is not found.`);
         }
         return result;
       } catch (error) {

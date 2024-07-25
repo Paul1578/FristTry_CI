@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { EstudiantesService } from './estudiantes.service';
 import { EstudiantesController } from './estudiantes.controller';
 import { Estudiantes } from './entities/estudiantes.entity';
-import { Catalogo } from 'src/catalogos/entities/catalogo.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ValorCatalogo } from 'src/catalogo-valor/entities/catalogo-valor.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Estudiantes,Catalogo])],
+  imports: [TypeOrmModule.forFeature([Estudiantes,ValorCatalogo])],
   providers: [EstudiantesService],
   controllers: [EstudiantesController]
 })

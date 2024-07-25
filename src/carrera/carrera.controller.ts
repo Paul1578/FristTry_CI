@@ -67,7 +67,7 @@ export class CarreraController {
     try {
       const result = await this.carreraService.search(query);
       if (!result) {
-        throw new NotFoundException(`The career with ${query} is not found.`);
+        throw new NotFoundException(`The career ${query} is not found.`);
       }
       return result;
     } catch (error) {

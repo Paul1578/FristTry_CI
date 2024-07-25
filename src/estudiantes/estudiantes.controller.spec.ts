@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EstudiantesController } from './estudiantes.controller';
 import { EstudiantesService } from './estudiantes.service';
-import { Estudiantes } from './entities/estudiantes.entity'; // Asegúrate de importar la entidad correspondiente
-import { Catalogo } from 'src/catalogos/entities/catalogo.entity';
+import { Estudiantes } from './entities/estudiantes.entity'; 
+import { Catalogo } from '../catalogos/entities/catalogo.entity';
+import { ValorCatalogo } from '../catalogo-valor/entities/catalogo-valor.entity';
 
 describe('EstudiantesController', () => {
   let controller: EstudiantesController;
@@ -15,7 +16,7 @@ describe('EstudiantesController', () => {
         {
           provide: EstudiantesService,
           useValue: {
-            findAll: jest.fn(), // Mock de la función findAll del servicio
+            findAll: jest.fn(), 
           },
         },
       ],
@@ -36,10 +37,18 @@ describe('EstudiantesController', () => {
       descripcion: 'Descripcion 1'
     };
 
-    const expectedEstudiantes: Estudiantes[] = [
-      { id: 1, apellidos: 'hernan', nombres: 'Miguel', cedula: '1', carreraId: 1,nivelId:1,email:'tuliso@gmail.com',telefono:'987654321',estadoCivilId:1,tipoDeSangreId:1,domicilio:'Pisullí',contactoDeEmergencia:'Mamá',telefonoDeEmergencia:'123456789',carrera:expectedCatalogos,nivel:expectedCatalogos,estadoCivil:expectedCatalogos,tipoDeSangre:expectedCatalogos},
-    ];
+    const expectedValorCatalogos: ValorCatalogo = {
+      id: 2,
+      valor: 'texto',
+      alias: 'texto',
+      catalogoId: 2,
+      catalogo: expectedCatalogos,
+      descripcion: 'Descripcion 1'
+    };
 
+    const expectedEstudiantes: Estudiantes[] = [
+      { id: 1, apellidos: 'hernan', nombres: 'Miguel', cedula: '1', carreraId: 1,nivelId:1,email:'tuliso@gmail.com',telefono:'987654321',estadoCivilId:1,tipoDeSangreId:1,domicilio:'Pisullí',contactoDeEmergencia:'Mamá',telefonoDeEmergencia:'123456789',carrera:expectedValorCatalogos,nivel:expectedValorCatalogos,estadoCivil:expectedValorCatalogos,tipoDeSangre:expectedValorCatalogos},
+    ];
 
     jest.spyOn(service, 'findAll').mockResolvedValue(expectedEstudiantes);
 
