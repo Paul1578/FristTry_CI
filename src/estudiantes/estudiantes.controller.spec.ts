@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EstudiantesController } from './estudiantes.controller';
 import { EstudiantesService } from './estudiantes.service';
-import { Estudiantes } from './entities/estudiantes.entity'; // Asegúrate de importar la entidad correspondiente
-import { Catalogo } from 'src/catalogos/entities/catalogo.entity';
-import { ValorCatalogo } from 'src/catalogo-valor/entities/catalogo-valor.entity';
+import { Estudiantes } from './entities/estudiantes.entity'; 
+import { Catalogo } from '../catalogos/entities/catalogo.entity';
+import { ValorCatalogo } from '../catalogo-valor/entities/catalogo-valor.entity';
 
 describe('EstudiantesController', () => {
   let controller: EstudiantesController;
@@ -16,7 +16,7 @@ describe('EstudiantesController', () => {
         {
           provide: EstudiantesService,
           useValue: {
-            findAll: jest.fn(), // Mock de la función findAll del servicio
+            findAll: jest.fn(), 
           },
         },
       ],

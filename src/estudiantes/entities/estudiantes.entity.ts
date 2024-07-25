@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ValorCatalogo } from 'src/catalogo-valor/entities/catalogo-valor.entity';
+import { ValorCatalogo } from '../../catalogo-valor/entities/catalogo-valor.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Generated } from 'typeorm';
 
 

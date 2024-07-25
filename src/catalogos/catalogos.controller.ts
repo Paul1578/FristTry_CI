@@ -53,7 +53,7 @@ export class CatalogoController {
     try{
       const result = await this.catalogoService.search(query);
       if(!result){
-        throw new NotFoundException(`Catalogue with ID ${query} not found.`);
+        throw new NotFoundException(`Catalogue ${query} not found.`);
       }
       return result;
     }catch(error) {
