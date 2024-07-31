@@ -125,8 +125,5 @@ export class CatalogoController {
       }
       throw new HttpException('Catalogue not found.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
-  }
-
-
-  
+  } 
 }
