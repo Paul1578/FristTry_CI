@@ -21,7 +21,7 @@ export class CatalogoValorService {
       }
     
     async findOne(id: number): Promise<ValorCatalogo> {
-        return this.valorCatalogoRepository.findOneBy({id});
+        return this.valorCatalogoRepository.findOne({where:{id}, relations: ['catalogo'],});
     }
 
     async search(query: string): Promise<ValorCatalogo[]> {
