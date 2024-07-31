@@ -4,7 +4,7 @@ import { IsString, IsEmail, IsOptional } from 'class-validator';
 export class UpdateEmpresaDto {
     @IsOptional()
     @IsString()
-    @ApiProperty({ example: 'Thowworks', description: 'El nombre de la empresa formadora' })
+    @ApiProperty({ example: 'Thoughtworks', description: 'El nombre de la empresa formadora' })
     razonSocial?: string;
 
     @IsOptional()
@@ -34,7 +34,7 @@ export class UpdateEmpresaDto {
 
     @IsOptional()
     @IsEmail()
-    @ApiProperty({ example: 'thowworks@gmail.com', description: 'Dirección de correo electrónico de la empresa.' })
+    @ApiProperty({ example: 'Thoughtworks@gmail.com', description: 'Dirección de correo electrónico de la empresa.' })
     email?: string;
 
     @IsOptional()

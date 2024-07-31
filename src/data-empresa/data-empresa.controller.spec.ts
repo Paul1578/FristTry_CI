@@ -37,13 +37,13 @@ describe('DataEmpresaController', () => {
       const expectedEmpresas: Empresa[] = [
         {
           id: 1,
-          razonSocial: 'Thowworks',
+          razonSocial: 'Thoughtworks',
           representanteLegal: 'Josue Andrade',
           cargoDelRepresentanteLegal: 'Gerente',
           tutorEmpresarial: 'Raul Paez',
           direccion: 'Juan Capmusano Oe-3 N185',
           telefono: '0999465555',
-          email: 'thowworks@gmail.com',
+          email: 'Thoughtworks@gmail.com',
           provincia: 'Pichincha',
           canton: 'Quito',
           parroquia: 'Carcelén',

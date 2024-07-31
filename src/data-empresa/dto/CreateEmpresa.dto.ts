@@ -4,7 +4,7 @@ import { IsNotEmpty, IsString, IsEmail } from 'class-validator';
 export class CreateEmpresaDto {
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ example: 'Thowworks', description: 'El nombre de la empresa formadora.' })
+    @ApiProperty({ example: 'Thoughtworks', description: 'El nombre de la empresa formadora.' })
     razonSocial: string;
 
     @IsNotEmpty()
@@ -26,7 +26,7 @@ export class CreateEmpresaDto {
     @IsString()
     @ApiProperty({ example: 'Juan Capmusano Oe-3 N185', description: 'Direccion de la empresa.' })
     direccion: string;
-    
+
     @IsNotEmpty()
     @IsString()
     @ApiProperty({ example: '0999465555', description: 'Número de teléfono de la empresa.' })
@@ -34,7 +34,7 @@ export class CreateEmpresaDto {
 
     @IsNotEmpty()
     @IsEmail()
-    @ApiProperty({ example: 'thowworks@gmail.com', description: 'Dirección de correo electrónico de la empresa.' })
+    @ApiProperty({ example: 'Thoughtworks@gmail.com', description: 'Dirección de correo electrónico de la empresa.' })
     email: string;
 
     @IsNotEmpty()

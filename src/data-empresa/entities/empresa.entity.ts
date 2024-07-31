@@ -8,7 +8,7 @@ export class Empresa {
     id: number;
 
     @Column()
-    @ApiProperty({ example: 'Thowworks', description: 'El nombre de la empresa formadora.' })
+    @ApiProperty({ example: 'Thoughtworks', description: 'El nombre de la empresa formadora.' })
     razonSocial: string;
 
     @Column()
@@ -32,7 +32,7 @@ export class Empresa {
     telefono: string;
 
     @Column()
-    @ApiProperty({ example: 'thowworks@gmail.com', description: 'Dirección de correo electrónico de la empresa.' })
+    @ApiProperty({ example: 'Thoughtworks@gmail.com', description: 'Dirección de correo electrónico de la empresa.' })
     email: string;
 
     @Column()
