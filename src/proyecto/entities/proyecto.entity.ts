@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Empresa } from "src/data-empresa/entities/empresa.entity";
+import { Empresa } from "../../data-empresa/entities/empresa.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
