@@ -9,36 +9,31 @@ export class Proyecto {
     @ApiProperty({ example: 1, description: 'ID único generado automáticamente' })
     id:number;
 
-    @ApiProperty({ example: 'John Dillan', description: 'Nombres del Estudiante' })
+    @ApiProperty({ example: 'Administracion de Productos', description: 'Nombre del proyecto' })
     @Column()
     nombre: string;
 
-    @ApiProperty({ example: 'John Dillan', description: 'Nombres del Estudiante' })
+    @ApiProperty({ example: 'Sierra, Pichincha, Quito, Rumipamba', description: 'Cobertura y Localización' })
     @Column()
     cobertura: string;
 
-    @ApiProperty({ example: 'Cárdenas Valle', description: 'Apellidos del Estudiante' })
+    @ApiProperty({ example: '2024-07-01', description: 'Fecha de inicio del proyecto' })
     @Column()
     fechaInicio:Date;
 
-    @ApiProperty({ example: 'Cárdenas Valle', description: 'Apellidos del Estudiante' })
+    @ApiProperty({ example: '2024-08-16', description: 'Fecha de final del proyecto' })
     @Column()
     fechaFin:Date;
 
-    @ApiProperty({ example: 'Cárdenas Valle', description: 'Apellidos del Estudiante' })
+    @ApiProperty({ example: '2024-02-26', description: 'Fecha del informe final del proyecto' })
     @Column()
     fechaInformeFinal:Date;
 
-    @ApiProperty({ example: 'Cárdenas Valle', description: 'Apellidos del Estudiante' })
-    @Column()
-    periodoAcademico:string;
-
-    @ApiProperty({ example: 'Cárdenas Valle', description: 'Apellidos del Estudiante' })
+    @ApiProperty({ example: 1, description: 'Empresa Beneficiaria' })
     @Column()
     empresaBeneficiariaId:number;
 
     @ManyToOne(() => Empresa, { lazy: true })
     @JoinColumn({ name: 'empresaBeneficiariaId' })
     empresaBeneficiaria: Empresa;
-
 }

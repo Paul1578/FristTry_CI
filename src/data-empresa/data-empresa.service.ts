@@ -28,7 +28,7 @@ export class DataEmpresaService {
       async create(createEmpresaDto: CreateEmpresaDto): Promise<Empresa> {
         const existingEmpresa = await this.empresaRepository.findOne({ where: { razonSocial: createEmpresaDto.razonSocial } });
         if (existingEmpresa) {
-            throw new ConflictException('La razon social ya está en uso.');
+          throw new ConflictException(`La razón social "${createEmpresaDto.razonSocial}" ya está en uso.`);
         }
 
         const empresa = this.empresaRepository.create(createEmpresaDto);
@@ -38,7 +38,7 @@ export class DataEmpresaService {
     async update(id: number, updateEmpresaDto: UpdateEmpresaDto): Promise<Empresa> {
       const existingEmpresa = await this.empresaRepository.findOne({ where: { razonSocial: updateEmpresaDto.razonSocial, id: Not(id) } });
       if (existingEmpresa) {
-          throw new ConflictException('La razon social ya está en uso.');
+        throw new ConflictException(`La razón social "${updateEmpresaDto.razonSocial}" ya está en uso.`);
       }
 
       await this.empresaRepository.update(id, updateEmpresaDto);

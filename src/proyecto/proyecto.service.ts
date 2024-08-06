@@ -15,7 +15,7 @@ export class ProyectoService {
       async findAll(): Promise<Proyecto[]> {
         return this.proyectoRepository.find({
           relations: ['empresaBeneficiaria'],
-          select: ['id', 'nombre','cobertura', 'fechaInicio','fechaFin','fechaInformeFinal','periodoAcademico','empresaBeneficiaria'],
+          select: ['id', 'nombre','cobertura', 'fechaInicio','fechaFin','fechaInformeFinal','empresaBeneficiaria'],
         });
       }
     
@@ -38,7 +38,6 @@ export class ProyectoService {
             where: [
               { nombre: ILike(`%${lowerCaseQuery}%`) },
               { cobertura: ILike(`%${lowerCaseQuery}%`) },
-              { periodoAcademico: ILike(`%${lowerCaseQuery}%`) },
 
             ],
             relations: ['empresaBeneficiaria'],
