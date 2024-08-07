@@ -38,7 +38,7 @@ export class DataEmpresaController {
         throw new HttpException('Razon Social is required.', HttpStatus.BAD_REQUEST);
       }
 
-      return await this.empresaService.empresaExiste(razonSocial);
+      return await this.empresaService.companyExists(razonSocial);
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;
@@ -90,19 +90,17 @@ export class DataEmpresaController {
   @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
   async create(@Body() createEmpresaDto: CreateEmpresaDto): Promise<Empresa> {
     try {
-      // Verificar si la empresa ya existe
-      const exists = await this.empresaService.empresaExiste(createEmpresaDto.razonSocial);
+      const exists = await this.empresaService.companyExists(createEmpresaDto.razonSocial);
       if (exists) {
         throw new HttpException('La empresa con esa razón social ya existe.', HttpStatus.BAD_REQUEST);
       }
   
-      // Crear la empresa
       return await this.empresaService.create(createEmpresaDto);
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;
       }
-      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('The Company has not been created, Please try again later.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
   

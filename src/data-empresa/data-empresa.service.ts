@@ -12,7 +12,7 @@ export class DataEmpresaService {
         private readonly empresaRepository: Repository<Empresa>,
       ) {}
 
-      async empresaExiste(razonSocial: string): Promise<boolean> {
+      async companyExists(razonSocial: string): Promise<boolean> {
         const empresa = await this.empresaRepository.findOne({ where: { razonSocial } });
         return !!empresa;
       }
