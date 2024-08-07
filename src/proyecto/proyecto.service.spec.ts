@@ -49,7 +49,6 @@ describe('ProyectoService', () => {
           fechaInicio: new Date('2024-01-01'),
           fechaFin: new Date('2024-12-31'),
           fechaInformeFinal: new Date('2024-12-31'),
-          periodoAcademico: '2024',
           empresaBeneficiaria: expectedCompany, 
           empresaBeneficiariaId:1, 
         },
