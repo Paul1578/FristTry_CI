@@ -9,7 +9,7 @@ export class Proyecto {
     @ApiProperty({ example: 1, description: 'ID único generado automáticamente' })
     id:number;
 
-    @ApiProperty({ example: 'Administracion de Productos', description: 'Nombre del proyecto' })
+    @ApiProperty({ example: 'Administracion de productos', description: 'Nombre del Proyecto' })
     @Column()
     nombre: string;
 
@@ -21,11 +21,12 @@ export class Proyecto {
     @Column()
     fechaInicio:Date;
 
-    @ApiProperty({ example: '2024-08-16', description: 'Fecha de final del proyecto' })
+
+    @ApiProperty({ example: '2024-08-16', description: 'Fecha final del proyecto' })
     @Column()
     fechaFin:Date;
 
-    @ApiProperty({ example: '2024-02-26', description: 'Fecha del informe final del proyecto' })
+    @ApiProperty({ example: '2024-02-26', description: 'Fecha de informe final del proyecto' })
     @Column()
     fechaInformeFinal:Date;
 

@@ -2,7 +2,7 @@ import { BadRequestException, Body, Controller, Delete, Get, HttpException, Http
 import { ProyectoService } from './proyecto.service';
 import { ApiBadRequestResponse, ApiBody, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Proyecto } from './entities/proyecto.entity';
-import { UpdateProyectoDto } from './dto/UpdateProyecto.dto';
+import { UpdateProjectDto } from './dto/UpdateProyecto.dto';
 import { CreateProyectoDto } from './dto/CreateProyecto.dto';
 
 @ApiTags('Proyecto')
@@ -113,17 +113,17 @@ export class ProyectoController {
     }
   
     @Put(':id')
-    @ApiBody({ type: UpdateProyectoDto })
+    @ApiBody({ type: UpdateProjectDto })
     @ApiOkResponse({
       status: 200,
       description: 'The ptoject has been successfully updated.',
-      type: UpdateProyectoDto,
+      type: UpdateProjectDto,
     })
     @ApiNotFoundResponse({ status: 404, description: 'The requested project was not found.' })
     @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
     async update(
       @Param('id') id: number,
-      @Body() updateProyectoDto: UpdateProyectoDto,
+      @Body() updateProyectoDto: UpdateProjectDto,
     ) {
       try {
         if (!updateProyectoDto || Object.keys(updateProyectoDto).length === 0) {

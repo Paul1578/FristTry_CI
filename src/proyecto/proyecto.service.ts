@@ -3,7 +3,7 @@ import { Proyecto } from './entities/proyecto.entity';
 import { ILike, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateProyectoDto } from './dto/CreateProyecto.dto';
-import { UpdateProyectoDto } from './dto/UpdateProyecto.dto';
+import { UpdateProjectDto } from './dto/UpdateProyecto.dto';
 
 @Injectable()
 export class ProyectoService {
@@ -38,7 +38,6 @@ export class ProyectoService {
             where: [
               { nombre: ILike(`%${lowerCaseQuery}%`) },
               { cobertura: ILike(`%${lowerCaseQuery}%`) },
-
             ],
             relations: ['empresaBeneficiaria'],
           });    
@@ -54,13 +53,28 @@ export class ProyectoService {
       
     
       async create(createProyectoDto: CreateProyectoDto): Promise<Proyecto> {
-        const Proyecto = this.proyectoRepository.create(createProyectoDto);
-        return this.proyectoRepository.save(Proyecto);
-      }
+        const { fechaInicio, fechaFin, fechaInformeFinal } = createProyectoDto;
+
+        if (fechaInicio >= fechaFin) {
+            throw new HttpException('La fecha de inicio debe ser anterior a la fecha de fin.', HttpStatus.BAD_REQUEST);
+        }
+
+        if (fechaFin > fechaInformeFinal) {
+            throw new HttpException('La fecha de fin debe ser anterior a la fecha del informe final.', HttpStatus.BAD_REQUEST);
+        }
+
+        if (fechaInicio > fechaInformeFinal || fechaFin > fechaInformeFinal) {
+            throw new HttpException('La fecha del informe final debe ser posterior a la fecha de inicio y la fecha de fin.', HttpStatus.BAD_REQUEST);
+        }
+
+        const proyecto = this.proyectoRepository.create(createProyectoDto);
+        return this.proyectoRepository.save(proyecto);
+    }
+
     
       async update(
         id: number,
-        updateProyectoDto: UpdateProyectoDto,
+        updateProyectoDto: UpdateProjectDto,
       ): Promise<Proyecto> {
         await this.proyectoRepository.update(id, updateProyectoDto);
         return this.findOne(id);
