@@ -3,7 +3,7 @@ import { Proyecto } from './entities/proyecto.entity';
 import { ILike, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateProyectoDto } from './dto/CreateProyecto.dto';
-import { UpdateProyectoDto } from './dto/UpdateProyecto.dto';
+import { UpdateProjectDto } from './dto/UpdateProyecto.dto';
 
 @Injectable()
 export class ProyectoService {
@@ -15,7 +15,7 @@ export class ProyectoService {
       async findAll(): Promise<Proyecto[]> {
         return this.proyectoRepository.find({
           relations: ['empresaBeneficiaria'],
-          select: ['id', 'nombre','cobertura', 'fechaInicio','fechaFin','fechaInformeFinal','periodoAcademico','empresaBeneficiaria'],
+          select: ['id', 'nombre','cobertura', 'fechaInicio','fechaFin','fechaInformeFinal','empresaBeneficiaria'],
         });
       }
     
@@ -38,8 +38,6 @@ export class ProyectoService {
             where: [
               { nombre: ILike(`%${lowerCaseQuery}%`) },
               { cobertura: ILike(`%${lowerCaseQuery}%`) },
-              { periodoAcademico: ILike(`%${lowerCaseQuery}%`) },
-
             ],
             relations: ['empresaBeneficiaria'],
           });    
@@ -61,7 +59,7 @@ export class ProyectoService {
     
       async update(
         id: number,
-        updateProyectoDto: UpdateProyectoDto,
+        updateProyectoDto: UpdateProjectDto,
       ): Promise<Proyecto> {
         await this.proyectoRepository.update(id, updateProyectoDto);
         return this.findOne(id);

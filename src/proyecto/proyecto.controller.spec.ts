@@ -36,11 +36,10 @@ describe('ProyectoController', () => {
           fechaInicio: new Date('2024-01-01'),
           fechaFin: new Date('2024-12-31'),
           fechaInformeFinal: new Date('2024-12-31'),
-          periodoAcademico: '2024',
           empresaBeneficiariaId: 1,
           empresaBeneficiaria: {
             id: 1,
-            razonSocial: 'toughworks',
+            razonSocial: 'Thoughtworks',
             representanteLegal: 'Pablo',
             tutorEmpresarial: 'Juan',
             cargoDelRepresentanteLegal: 'gerente',
