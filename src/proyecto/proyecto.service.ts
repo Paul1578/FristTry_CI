@@ -53,9 +53,24 @@ export class ProyectoService {
       
     
       async create(createProyectoDto: CreateProyectoDto): Promise<Proyecto> {
-        const Proyecto = this.proyectoRepository.create(createProyectoDto);
-        return this.proyectoRepository.save(Proyecto);
-      }
+        const { fechaInicio, fechaFin, fechaInformeFinal } = createProyectoDto;
+
+        if (fechaInicio >= fechaFin) {
+            throw new HttpException('La fecha de inicio debe ser anterior a la fecha de fin.', HttpStatus.BAD_REQUEST);
+        }
+
+        if (fechaFin > fechaInformeFinal) {
+            throw new HttpException('La fecha de fin debe ser anterior a la fecha del informe final.', HttpStatus.BAD_REQUEST);
+        }
+
+        if (fechaInicio > fechaInformeFinal || fechaFin > fechaInformeFinal) {
+            throw new HttpException('La fecha del informe final debe ser posterior a la fecha de inicio y la fecha de fin.', HttpStatus.BAD_REQUEST);
+        }
+
+        const proyecto = this.proyectoRepository.create(createProyectoDto);
+        return this.proyectoRepository.save(proyecto);
+    }
+
     
       async update(
         id: number,
