@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Post, Put, Query } from '@nestjs/common';
 import { DataEmpresaService } from './data-empresa.service';
 import { Empresa } from './entities/empresa.entity';
-import { ApiBadRequestResponse, ApiBody, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBody, ApiNotFoundResponse, ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { CreateEmpresaDto} from './dto/CreateEmpresa.dto';
 import { UpdateEmpresaDto } from './dto/UpdateEmpresa.dto';
 
@@ -27,6 +27,26 @@ export class DataEmpresaController {
     }
     
   }
+
+  @Get('exists')
+  @ApiQuery({ name: 'razonSocial', required: true })
+  @ApiOkResponse({ status: 200, description: 'Check if the company exists.', type: Boolean })
+  @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
+  async checkExists(@Query('razonSocial') razonSocial: string): Promise<boolean> {
+    try {
+      if (!razonSocial) {
+        throw new HttpException('Razon Social is required.', HttpStatus.BAD_REQUEST);
+      }
+
+      return await this.empresaService.companyExists(razonSocial);
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 
   @Get(':id')
   @ApiOkResponse({ status: 200, description: 'Successfully retrieved company', type: Empresa})
@@ -68,22 +88,22 @@ export class DataEmpresaController {
   @ApiBody({ type: CreateEmpresaDto })
   @ApiOkResponse({ status: 200, description: 'The Company has been successfully created.', type: CreateEmpresaDto })
   @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
-  async create(@Body() createCatalogoDto: CreateEmpresaDto): Promise<Empresa> {
+  async create(@Body() createEmpresaDto: CreateEmpresaDto): Promise<Empresa> {
     try {
-      if (!createCatalogoDto || Object.keys(createCatalogoDto).length === 0) {
-        throw new HttpException('The creation data is empty.', HttpStatus.BAD_REQUEST);
+      const exists = await this.empresaService.companyExists(createEmpresaDto.razonSocial);
+      if (exists) {
+        throw new HttpException('La empresa con esa razón social ya existe.', HttpStatus.BAD_REQUEST);
       }
-
-      const result = await this.empresaService.create(createCatalogoDto);
-      return result;
+  
+      return await this.empresaService.create(createEmpresaDto);
     } catch (error) {
       if (error instanceof HttpException) {
-        throw error; 
+        throw error;
       }
-      throw new HttpException('Company not found.', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('The Company has not been created, Please try again later.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
+  
   @Put(':id')
   @ApiBody({ type: UpdateEmpresaDto })
   @ApiOkResponse({ status: 200, description: 'The Company has been successfully updated.', type: UpdateEmpresaDto })

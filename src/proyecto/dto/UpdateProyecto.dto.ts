@@ -1,6 +1,7 @@
 
 import { ApiProperty } from "@nestjs/swagger";
 
+
 export class UpdateProjectDto {
     @ApiProperty({ example: 'Administracion de productos"', description: 'Nombre del Proyecto' })
     nombre:string;
@@ -11,6 +12,7 @@ export class UpdateProjectDto {
     @ApiProperty({ example: '2024-07-01', description: 'Fecha de inicio del proyecto' })
     fechaInicio:Date;
 
+
     @ApiProperty({ example: '2024-08-16', description: 'Fecha final del proyecto' })
     fechaFin:Date;
 
@@ -19,5 +21,4 @@ export class UpdateProjectDto {
 
     @ApiProperty({ example: 1, description: 'Empresa Beneficiaria' })
     empresaBeneficiariaId:number;
-
 }

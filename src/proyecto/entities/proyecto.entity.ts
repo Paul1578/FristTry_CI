@@ -21,6 +21,7 @@ export class Proyecto {
     @Column()
     fechaInicio:Date;
 
+
     @ApiProperty({ example: '2024-08-16', description: 'Fecha final del proyecto' })
     @Column()
     fechaFin:Date;
@@ -36,5 +37,4 @@ export class Proyecto {
     @ManyToOne(() => Empresa, { lazy: true })
     @JoinColumn({ name: 'empresaBeneficiariaId' })
     empresaBeneficiaria: Empresa;
-
 }

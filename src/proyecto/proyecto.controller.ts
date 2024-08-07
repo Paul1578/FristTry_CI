@@ -16,7 +16,7 @@ export class ProyectoController {
       description: 'Successful query, recovered project.',
       type: Proyecto,
     })
-    @ApiNotFoundResponse({ status: 404, description: 'Empty.' })
+    @ApiNotFoundResponse({ status: 404, description: 'project not found or non-existent.' })
     async findAll(): Promise<Proyecto[]> {
       try {
         const result = await this.proyectoService.findAll();

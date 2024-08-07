@@ -1,13 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
+@Unique(["razonSocial"]) 
 export class Empresa {
     @PrimaryGeneratedColumn()
     @ApiProperty({ example: 1, description: 'ID único generado automáticamente.' })
     id: number;
 
-    @Column()
+    @Column({ unique: true })
     @ApiProperty({ example: 'Thoughtworks', description: 'El nombre de la empresa formadora.' })
     razonSocial: string;
 
