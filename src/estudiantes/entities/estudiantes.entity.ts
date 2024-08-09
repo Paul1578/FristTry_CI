@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ValorCatalogo } from '../../catalogo-valor/entities/catalogo-valor.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Generated } from 'typeorm';
-import { Proyecto } from 'src/proyecto/entities/proyecto.entity';
+import { Proyecto } from '../../proyecto/entities/proyecto.entity';
 
 
 @Entity()
