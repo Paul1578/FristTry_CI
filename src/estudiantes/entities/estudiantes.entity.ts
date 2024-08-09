@@ -43,7 +43,7 @@ export class Estudiantes {
     @Column()
     tipoDeSangreId: number;
     
-    @Column()
+    @Column({ nullable: true })
     proyectoEmpresarialId: number;
 
     @ApiProperty({ example: 'Pisulli', description: 'Domicilio del Estudiante' })
@@ -57,7 +57,7 @@ export class Estudiantes {
     @ApiProperty({ example: 9987654312, description: 'Teléfono del contacto de emergencia del Estudiante' })
     @Column()
     telefonoDeEmergencia: string;
-
+    
     @ManyToOne(() => ValorCatalogo, { lazy: true })
     @JoinColumn({ name: 'carreraId' })
     carrera: ValorCatalogo;

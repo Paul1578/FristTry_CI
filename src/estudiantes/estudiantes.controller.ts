@@ -83,35 +83,37 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
     }
   
     @Post()
-    @ApiBody({ type: CreateEstudiantesDto })
-    @ApiOkResponse({
-      status: 200,
-      description: 'The student has been created successfully.',
-      type: CreateEstudiantesDto,
-    })
-    @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
-    async create(@Body() createEstudiantesDto: CreateEstudiantesDto): Promise<Estudiantes> {
-      try {
-        if (!createEstudiantesDto || Object.keys(createEstudiantesDto).length === 0) {
-          throw new HttpException(
-            'The creation data is empty.',
-            HttpStatus.BAD_REQUEST,
-          );
-        }
-  
-        const result = await this.estudiantesService.create(createEstudiantesDto);
-        return result;
-      } catch (error) {
-        console.log(error);
-        if (error instanceof HttpException) {
-          throw error;
-        }
-        throw new HttpException(
-          'Student not found.',
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
+  @ApiBody({ type: CreateEstudiantesDto })
+  @ApiOkResponse({
+    status: 200,
+    description: 'The student has been created successfully.',
+    type: Estudiantes, // Cambia a la entidad de Estudiantes para la respuesta exitosa
+  })
+  @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
+  async create(@Body() createEstudiantesDto: CreateEstudiantesDto): Promise<Estudiantes> {
+    try {
+      // Validar que los datos no estén vacíos
+      if (!createEstudiantesDto || Object.keys(createEstudiantesDto).length === 0) {
+        throw new HttpException('The creation data is empty.', HttpStatus.BAD_REQUEST);
       }
+
+      // Manejar campos opcionales
+      if (createEstudiantesDto.proyectoEmpresarialId === null) {
+        createEstudiantesDto.proyectoEmpresarialId = null;
+      }
+
+      // Llamar al servicio para crear el estudiante
+      const result = await this.estudiantesService.create(createEstudiantesDto);
+      return result;
+    } catch (error) {
+      console.error(error); // Asegúrate de que el error se registre adecuadamente
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException('Student not created.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
   
     @Put(':id')
     @ApiBody({ type: UpdateEstudiantesDto })
