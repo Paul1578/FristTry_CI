@@ -16,15 +16,15 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
   
     async findAll(): Promise<Estudiantes[]> {
       return this.estudiantesRepository.find({
-        relations: ['carrera', 'nivel','estadoCivil','tipoDeSangre'],
-        select: ['id', 'apellidos','nombres', 'cedula','email','telefono','domicilio','contactoDeEmergencia','telefonoDeEmergencia'],
+        relations: ['carrera', 'nivel','estadoCivil','tipoDeSangre','proyectoEmpresarial'],
+        select: ['id', 'apellidos','nombres', 'cedula','email','telefono','domicilio','contactoDeEmergencia','telefonoDeEmergencia','proyectoEmpresarial'],
       });
     }
   
     async findOne(id: number): Promise<Estudiantes> {
       const Estudiantes = await this.estudiantesRepository.findOne({
         where: { id },
-        relations: ['carrera', 'nivel','estadoCivil','tipoDeSangre'],
+        relations: ['carrera', 'nivel','estadoCivil','tipoDeSangre','proyectoEmpresarial'],
       });
       if (!Estudiantes) {
         throw new NotFoundException(`The student with ID ${id} is not found.`);
@@ -54,7 +54,7 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
             { carrera: { valor: ILike(`%${lowerCaseQuery}%`) } },
             { carrera: { descripcion: ILike(`%${lowerCaseQuery}%`) } },
           ],
-          relations: ['carrera', 'nivel', 'estadoCivil', 'tipoDeSangre'],
+          relations: ['carrera', 'nivel', 'estadoCivil', 'tipoDeSangre','proyectoEmpresarial'],
         });    
 
         return results;

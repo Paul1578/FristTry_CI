@@ -33,7 +33,7 @@ export class CatalogoValorService {
                     { alias: ILike(`%${lowerCaseQuery}%`) },
                     { descripcion: ILike(`%${lowerCaseQuery}%`) },
                     { catalogo: { nombre: ILike(`%${lowerCaseQuery}%`) } },
-                    { catalogo: { descripcion: ILike(`%${lowerCaseQuery}%`) } },
+                    
                 ],
                 relations: ['catalogo'],
             });
