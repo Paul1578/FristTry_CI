@@ -83,35 +83,36 @@ import { UpdateEstudiantesDto } from './dto/UpdateEstudiantes.dto';
     }
   
     @Post()
-    @ApiBody({ type: CreateEstudiantesDto })
-    @ApiOkResponse({
-      status: 200,
-      description: 'The student has been created successfully.',
-      type: CreateEstudiantesDto,
-    })
-    @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
-    async create(@Body() createEstudiantesDto: CreateEstudiantesDto): Promise<Estudiantes> {
-      try {
-        if (!createEstudiantesDto || Object.keys(createEstudiantesDto).length === 0) {
-          throw new HttpException(
-            'The creation data is empty.',
-            HttpStatus.BAD_REQUEST,
-          );
-        }
-  
-        const result = await this.estudiantesService.create(createEstudiantesDto);
-        return result;
-      } catch (error) {
-        console.log(error);
-        if (error instanceof HttpException) {
-          throw error;
-        }
-        throw new HttpException(
-          'Student not found.',
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
+  @ApiBody({ type: CreateEstudiantesDto })
+  @ApiOkResponse({
+    status: 200,
+    description: 'The student has been created successfully.',
+    type: Estudiantes, 
+  })
+  @ApiBadRequestResponse({ status: 400, description: 'Bad Request.' })
+  async create(@Body() createEstudiantesDto: CreateEstudiantesDto): Promise<Estudiantes> {
+    try {
+      
+      if (!createEstudiantesDto || Object.keys(createEstudiantesDto).length === 0) {
+        throw new HttpException('The creation data is empty.', HttpStatus.BAD_REQUEST);
       }
+
+
+      if (createEstudiantesDto.proyectoEmpresarialId === null) {
+        createEstudiantesDto.proyectoEmpresarialId = null;
+      }
+
+      const result = await this.estudiantesService.create(createEstudiantesDto);
+      return result;
+    } catch (error) {
+      console.error(error); 
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException('Student not created.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
   
     @Put(':id')
     @ApiBody({ type: UpdateEstudiantesDto })

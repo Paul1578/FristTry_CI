@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsInt, IsOptional } from "class-validator";
 
 
 export class CreateEstudiantesDto {
@@ -29,6 +30,11 @@ estadoCivilId: number;
 
 @ApiProperty({ example: 2, description: 'Teléfono del Estudiante' })
 tipoDeSangreId: number;
+
+@IsOptional()
+@IsInt()
+@ApiProperty({ example: 2, description: 'Teléfono del Estudiante' })
+proyectoEmpresarialId?: number;
 
 @ApiProperty({ example: 'Pisulli', description: 'Domicilio del Estudiante' })
 domicilio: string;

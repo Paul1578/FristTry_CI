@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ValorCatalogo } from '../../catalogo-valor/entities/catalogo-valor.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Generated } from 'typeorm';
+import { Proyecto } from '../../proyecto/entities/proyecto.entity';
 
 
 @Entity()
@@ -41,6 +42,9 @@ export class Estudiantes {
 
     @Column()
     tipoDeSangreId: number;
+    
+    @Column({ nullable: true })
+    proyectoEmpresarialId: number;
 
     @ApiProperty({ example: 'Pisulli', description: 'Domicilio del Estudiante' })
     @Column()
@@ -53,7 +57,7 @@ export class Estudiantes {
     @ApiProperty({ example: 9987654312, description: 'Teléfono del contacto de emergencia del Estudiante' })
     @Column()
     telefonoDeEmergencia: string;
-
+    
     @ManyToOne(() => ValorCatalogo, { lazy: true })
     @JoinColumn({ name: 'carreraId' })
     carrera: ValorCatalogo;
@@ -69,4 +73,8 @@ export class Estudiantes {
     @ManyToOne(() => ValorCatalogo, { lazy: true })
     @JoinColumn({ name: 'tipoDeSangreId' })
     tipoDeSangre: ValorCatalogo
+
+    @ManyToOne(() => Proyecto, { lazy: true, nullable: true  })
+    @JoinColumn({ name: 'proyectoEmpresarialId' })
+    proyectoEmpresarial?: Proyecto
 }
