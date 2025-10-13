@@ -21,4 +21,3 @@ export class AuthService {
         return 'login' 
      }
 }
-
