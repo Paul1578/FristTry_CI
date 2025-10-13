@@ -24,3 +24,7 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Deploy to Vercel
+        if: success()
+        run: curl -X POST https://api.render.com/deploy/srv-d3m76nemcj7s73aet2s0?key=F6LSBTqhcPk
