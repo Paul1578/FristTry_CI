@@ -30,19 +30,13 @@ if (existsCaPath) {
     ConfigModule.forRoot({
       envFilePath: [`.env`],
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
+   TypeOrmModule.forRootAsync({
+      useFactory: () => ({
         type: 'postgres',
+        url: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false }, // necesario para Render
         autoLoadEntities: true,
-        synchronize: configService.get<boolean>('DB_SYNC'),
-        host: configService.get<string>('DB_HOST'),
-        port: configService.get<number>('DB_PORT'),
-        username: configService.get<string>('DB_USER'),
-        password: configService.get<string>('DB_PASSWORD'),
-        database: configService.get<string>('DB_NAME'),
-        ssl: existsCaPath ? sslConfig : false,
+        synchronize: true, // cuidado: solo en desarrollo
       }),
     }),
     CatalogosModule,
