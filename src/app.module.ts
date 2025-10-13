@@ -9,6 +9,8 @@ import { CarreraModule } from './carrera/carrera.module';
 import { EstudiantesModule } from './estudiantes/estudiantes.module';
 import { DataEmpresaModule } from './data-empresa/data-empresa.module';
 import { ProyectoModule } from './proyecto/proyecto.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 import * as fs from 'fs';
 
 let sslConfig = {};
@@ -49,6 +51,8 @@ if (existsCaPath) {
     CarreraModule,
     DataEmpresaModule,
     ProyectoModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
