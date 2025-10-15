@@ -171,5 +171,25 @@ export class CarreraController {
       );
     }
   }
+  @ApiNotFoundResponse({ status: 404, description: 'The requested career was not found.' })
+  async removeV2(@Param('id') id: number): Promise<Carrera> {
+    try {
+      const deletedCarrera = await this.carreraService.remove(id);
+      if (!deletedCarrera) {
+        throw new NotFoundException(`The Career with ID ${id} is not found.`);
+      }
+      return deletedCarrera;
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'Career not found.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+
 }
 
